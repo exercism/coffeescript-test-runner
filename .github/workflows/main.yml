@@ -1,4 +1,3 @@
----
 name: CI
 
 on:
@@ -8,19 +7,14 @@ on:
   push:
     branches:
       - main
-    paths-ignore:
-      - ".gitignore"
-      - "LICENSE"
 
 jobs:
   build:
-    name: Test Runner
+    name: Tests
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
+      - name: Checkout code
+        uses: actions/checkout@5a4ac9002d0be2fb38bd78e4b4dbde5606d7042f # 2.3.4
 
-      - name: Build Docker Image
-        run: docker build -f Dockerfile -t generic-test-runner .
-
-      - name: Run Tests
-        run: docker run -w "/opt/test-runner" --entrypoint "bin/run-tests.sh" generic-test-runner
+      - name: Run Tests in Docker
+        run: bin/run-tests-in-docker.sh

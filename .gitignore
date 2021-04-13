@@ -1,1 +1,4 @@
 tests/**/results.json
+tests/**/node_modules/
+tests/**/*.js
+

@@ -1,0 +1,10 @@
+{
+  "name": "exercism-coffeescript",
+  "version": "0.1.0",
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "coffeescript": "^2.5.1",
+    "jasmine-node": "^3.0.0"
+  }
+}
