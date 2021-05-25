@@ -55,7 +55,7 @@ mv -f "${original_tests_file}" "${tests_file}"
 if [ $exit_code -eq 0 ]; then
     jq -n '{version: 1, status: "pass"}' > ${results_file}
 else
-    jq -n --arg output "${test_output}" '{version: 1, status: "fail", output: $output}' > ${results_file}
+    jq -n --arg output "${test_output}" '{version: 1, status: "fail", message: $output}' > ${results_file}
 fi
 
 echo "${slug}: done"
