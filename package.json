@@ -3,10 +3,9 @@
   "version": "0.1.0",
   "author": "",
   "license": "MIT",
-  "devDependencies": {
-    "jasmine-node": "^3.0.0"
-  },
+  "devDependencies": {},
   "dependencies": {
+    "jasmine-node": "^3.0.0",
     "coffeescript": "^2.7.0",
     "fast-xml-parser": "^4.2.5"
   }
