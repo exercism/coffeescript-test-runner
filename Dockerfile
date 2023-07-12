@@ -10,5 +10,5 @@ COPY package.json .
 COPY package-lock.json .
 RUN npm install -g
 COPY . .
-RUN npx coffee -c ./bin/results.coffee
+RUN bin/build.sh
 ENTRYPOINT ["/opt/test-runner/bin/run.sh"]
