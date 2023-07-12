@@ -4,71 +4,85 @@
 	"tests": [
 		{
 			"name": "stating something",
+			"test_code": "result = bob.hey 'Tom-ay-to, tom-aaaah-to.'\nexpect(result).toEqual 'Whatever.'",
 			"status": "pass",
 			"message": null
 		},
 		{
 			"name": "shouting",
+			"test_code": "result = bob.hey 'WATCH OUT!'\nexpect(result).toEqual 'Whoa, chill out!'",
 			"status": "pass",
 			"message": null
 		},
 		{
 			"name": "asking a question",
+			"test_code": "result = bob.hey 'Does this cryogenic chamber make me look fat?'\nexpect(result).toEqual 'Sure.'",
 			"status": "pass",
 			"message": null
 		},
 		{
 			"name": "talking forcefully",
+			"test_code": "result = bob.hey 'Let\\'s go make out behind the gym!'\nexpect(result).toEqual 'Whatever.'",
 			"status": "pass",
 			"message": null
 		},
 		{
 			"name": "using acronyms in regular speech",
+			"test_code": "result = bob.hey 'It\\'s OK if you don\\'t want to go to the DMV.'\nexpect(result).toEqual 'Whatever.'",
 			"status": "pass",
 			"message": null
 		},
 		{
 			"name": "forceful questions",
+			"test_code": "result = bob.hey 'WHAT THE HELL WERE YOU THINKING?'\nexpect(result).toEqual 'Whoa, chill out!'",
 			"status": "pass",
 			"message": null
 		},
 		{
 			"name": "shouting numbers",
+			"test_code": "result = bob.hey '1, 2, 3 GO!'\nexpect(result).toEqual 'Whoa, chill out!'",
 			"status": "pass",
 			"message": null
 		},
 		{
 			"name": "only number",
+			"test_code": "result = bob.hey '1, 2, 3'\nexpect(result).toEqual 'Whatever.'",
 			"status": "pass",
 			"message": null
 		},
 		{
 			"name": "shouting with special characters",
+			"test_code": "result = bob.hey 'ZOMG THE %^*@#$(*^ ZOMBIES ARE COMING!!11!!1!'\nexpect(result).toEqual 'Whoa, chill out!'",
 			"status": "pass",
 			"message": null
 		},
 		{
 			"name": "shouting with no exclamation mark",
+			"test_code": "result = bob.hey 'I HATE YOU'\nexpect(result).toEqual 'Whoa, chill out!'",
 			"status": "pass",
 			"message": null
 		},
 		{
 			"name": "statement containing question mark",
+			"test_code": "result = bob.hey 'Ending with a ? means a question.'\nexpect(result).toEqual 'Whatever.'",
 			"status": "pass",
 			"message": null
 		},
 		{
 			"name": "prattling on",
+			"test_code": "result = bob.hey 'Wait! Hang on.  Are you going to be OK?'\nexpect(result).toEqual 'Sure.'",
 			"status": "pass",
 			"message": null
 		},
 		{
 			"name": "silence",
+			"test_code": "result = bob.hey ''\nexpect(result).toEqual 'Fine. Be that way!'",
 			"status": "fail",
 			"message": "Expected &apos;Okay. Be that way!&apos; to equal &apos;Fine. Be that way!&apos;."
 		},
 		{
 			"name": "prolonged silence",
+			"test_code": "result = bob.hey '   '\nexpect(result).toEqual 'Fine. Be that way!'",
 			"status": "fail",
 			"message": "Expected &apos;Okay. Be that way!&apos; to equal &apos;Fine. Be that way!&apos;."
 		}

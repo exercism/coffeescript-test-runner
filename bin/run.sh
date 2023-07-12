@@ -27,6 +27,7 @@ output_dir="${3%/}"
 tests_file="${input_dir}/${slug}.spec.coffee"
 original_tests_file="${input_dir}/${slug}.spec.coffee.original"
 capture_file="${output_dir}/capture"
+ast_file="${output_dir}/ast.json"
 results_file="${output_dir}/results.json"
 
 # Create the output directory if it doesn't exist
@@ -41,8 +42,9 @@ sed -i 's/xit/it/g' "${tests_file}"
 
 # Run the tests for the provided implementation file and redirect stdout and
 # stderr to capture it
+npx coffee --ast "${tests_file}" &>  "${ast_file}"
 test_output=$(npx jasmine-node --color --junitreport --output ${output_dir} --coffee "${tests_file}" &> "${capture_file}")
 file=$(find ${output_dir} -type f -name "*.xml")
-node bin/results.js "${file}" "${output_dir}" "${capture_file}"
+node bin/results.js "${file}" "${output_dir}" "${capture_file}" "${ast_file}" ${tests_file}
 
 mv -f "${original_tests_file}" "${tests_file}"
