@@ -1,4 +1,4 @@
-FROM node:12-alpine
+FROM node:14-alpine
 RUN apk add --no-cache jq coreutils bash
 
 ENV NO_UPDATE_NOTIFIER true
@@ -9,5 +9,5 @@ COPY . .
 RUN npm install -g
 RUN npx -v
 RUN npx coffee -v
-RUN npx coffee --compile ./bin/results.coffee -o ./bin
+RUN npx coffee --compile ./bin/results.coffee
 ENTRYPOINT ["/opt/test-runner/bin/run.sh"]
