@@ -4,10 +4,10 @@
   "author": "",
   "license": "MIT",
   "devDependencies": {
-    "jasmine-node": "^3.0.0"
+    "jasmine-node": "^3.0.0",
+    "coffeescript": "^2.7.0"
   },
   "dependencies": {
-    "coffeescript": "^2.7.0",
     "fast-xml-parser": "^4.2.5"
   }
 }
