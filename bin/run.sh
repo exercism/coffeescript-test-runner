@@ -41,7 +41,7 @@ sed -i 's/xit/it/g' "${tests_file}"
 
 # Run the tests for the provided implementation file and redirect stdout and
 # stderr to capture it
-test_output=$(jasmine-node --color --junitreport --output ${output_dir} --coffee "${tests_file}" &> "${capture_file}")
+test_output=$(npx jasmine-node --color --junitreport --output ${output_dir} --coffee "${tests_file}" &> "${capture_file}")
 file=$(find ${output_dir} -type f -name "*.xml")
 node bin/results.js "${file}" "${output_dir}" "${capture_file}"
 
