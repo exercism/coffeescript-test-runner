@@ -6,6 +6,6 @@ ENV NO_UPDATE_NOTIFIER true
 WORKDIR /opt/test-runner
 COPY . .
 
-RUN npm install -g
+RUN npm install
 RUN npx coffee --compile ./bin/results.coffee
 ENTRYPOINT ["/opt/test-runner/bin/run.sh"]
