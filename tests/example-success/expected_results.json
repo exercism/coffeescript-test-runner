@@ -1,4 +1,76 @@
 {
-  "version": 1,
-  "status": "pass"
+	"version": 2,
+	"status": "pass",
+	"tests": [
+		{
+			"name": "stating something",
+			"status": "pass",
+			"message": null
+		},
+		{
+			"name": "shouting",
+			"status": "pass",
+			"message": null
+		},
+		{
+			"name": "asking a question",
+			"status": "pass",
+			"message": null
+		},
+		{
+			"name": "talking forcefully",
+			"status": "pass",
+			"message": null
+		},
+		{
+			"name": "using acronyms in regular speech",
+			"status": "pass",
+			"message": null
+		},
+		{
+			"name": "forceful questions",
+			"status": "pass",
+			"message": null
+		},
+		{
+			"name": "shouting numbers",
+			"status": "pass",
+			"message": null
+		},
+		{
+			"name": "only number",
+			"status": "pass",
+			"message": null
+		},
+		{
+			"name": "shouting with special characters",
+			"status": "pass",
+			"message": null
+		},
+		{
+			"name": "shouting with no exclamation mark",
+			"status": "pass",
+			"message": null
+		},
+		{
+			"name": "statement containing question mark",
+			"status": "pass",
+			"message": null
+		},
+		{
+			"name": "prattling on",
+			"status": "pass",
+			"message": null
+		},
+		{
+			"name": "silence",
+			"status": "pass",
+			"message": null
+		},
+		{
+			"name": "prolonged silence",
+			"status": "pass",
+			"message": null
+		}
+	]
 }

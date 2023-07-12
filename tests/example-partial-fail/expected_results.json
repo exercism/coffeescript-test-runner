@@ -1,5 +1,76 @@
 {
-  "version": 1,
-  "status": "fail",
-  "message": "\u001b[32m.\u001b[0m\u001b[32m.\u001b[0m\u001b[32m.\u001b[0m\u001b[32m.\u001b[0m\u001b[32m.\u001b[0m\u001b[32m.\u001b[0m\u001b[32m.\u001b[0m\u001b[32m.\u001b[0m\u001b[32m.\u001b[0m\u001b[32m.\u001b[0m\u001b[32m.\u001b[0m\u001b[32m.\u001b[0m\u001b[31mF\u001b[0m\u001b[31mF\u001b[0m\n\nFailures:\n\n  1) Bob silence\n   Message:\n     \u001b[31mExpected 'Okay. Be that way!' to equal 'Fine. Be that way!'.\u001b[0m\n   Stacktrace:\n     Error: Expected 'Okay. Be that way!' to equal 'Fine. Be that way!'.\n    at jasmine.Spec.<anonymous> (/solution/example-partial-fail.spec.coffee:54:20)\n    at listOnTimeout (internal/timers.js:554:17)\n    at processTimers (internal/timers.js:497:7)\n\n\n  2) Bob prolonged silence\n   Message:\n     \u001b[31mExpected 'Okay. Be that way!' to equal 'Fine. Be that way!'.\u001b[0m\n   Stacktrace:\n     Error: Expected 'Okay. Be that way!' to equal 'Fine. Be that way!'.\n    at jasmine.Spec.<anonymous> (/solution/example-partial-fail.spec.coffee:58:20)\n    at listOnTimeout (internal/timers.js:554:17)\n    at processTimers (internal/timers.js:497:7)\n\n\n\n\u001b[31m14 tests, 14 assertions, 2 failures, 0 skipped\n\u001b[0m"
+	"version": 2,
+	"status": "fail",
+	"tests": [
+		{
+			"name": "stating something",
+			"status": "pass",
+			"message": null
+		},
+		{
+			"name": "shouting",
+			"status": "pass",
+			"message": null
+		},
+		{
+			"name": "asking a question",
+			"status": "pass",
+			"message": null
+		},
+		{
+			"name": "talking forcefully",
+			"status": "pass",
+			"message": null
+		},
+		{
+			"name": "using acronyms in regular speech",
+			"status": "pass",
+			"message": null
+		},
+		{
+			"name": "forceful questions",
+			"status": "pass",
+			"message": null
+		},
+		{
+			"name": "shouting numbers",
+			"status": "pass",
+			"message": null
+		},
+		{
+			"name": "only number",
+			"status": "pass",
+			"message": null
+		},
+		{
+			"name": "shouting with special characters",
+			"status": "pass",
+			"message": null
+		},
+		{
+			"name": "shouting with no exclamation mark",
+			"status": "pass",
+			"message": null
+		},
+		{
+			"name": "statement containing question mark",
+			"status": "pass",
+			"message": null
+		},
+		{
+			"name": "prattling on",
+			"status": "pass",
+			"message": null
+		},
+		{
+			"name": "silence",
+			"status": "fail",
+			"message": "Expected &apos;Okay. Be that way!&apos; to equal &apos;Fine. Be that way!&apos;."
+		},
+		{
+			"name": "prolonged silence",
+			"status": "fail",
+			"message": "Expected &apos;Okay. Be that way!&apos; to equal &apos;Fine. Be that way!&apos;."
+		}
+	]
 }
