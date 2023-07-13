@@ -1,5 +1,6 @@
 {
-  "version": 1,
-  "status": "fail",
-  "message": "Exception loading: /solution/example-syntax-error.spec.coffee\n[/solution/example-syntax-error.coffee:1:13: error: unexpected @\nclasSSY Bo%b@\n            ^] {\n  location: { first_line: 0, first_column: 12, last_line: 0, last_column: 12 },\n  toString: [Function: syntaxErrorToString],\n  code: 'clasSSY Bo%b@',\n  filename: '/solution/example-syntax-error.coffee'\n}\nunexpected @"
+	"version": 2,
+	"status": "error",
+	"tests": [],
+	"message": "Exception loading: /solution/example-syntax-error.spec.coffee\n[/solution/example-syntax-error.coffee:1:13: error: unexpected @\nclasSSY Bo%b@\n            ^] {\n  location: { first_line: 0, first_column: 12, last_line: 0, last_column: 12 },\n  toString: [Function: syntaxErrorToString],\n  code: 'clasSSY Bo%b@',\n  filename: '/solution/example-syntax-error.coffee'\n}\nunexpected @\n"
 }

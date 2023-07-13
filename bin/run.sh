@@ -26,6 +26,8 @@ input_dir="${2%/}"
 output_dir="${3%/}"
 tests_file="${input_dir}/${slug}.spec.coffee"
 original_tests_file="${input_dir}/${slug}.spec.coffee.original"
+capture_file="${output_dir}/capture"
+ast_file="${output_dir}/ast.json"
 results_file="${output_dir}/results.json"
 
 # Create the output directory if it doesn't exist
@@ -40,22 +42,9 @@ sed -i 's/xit/it/g' "${tests_file}"
 
 # Run the tests for the provided implementation file and redirect stdout and
 # stderr to capture it
-test_output=$(npx jasmine-node --color --coffee "${tests_file}" 2>&1)
-exit_code=$?
-exception=$(echo "${test_output}" | grep -c 'Exception loading')
-
-if [[ $exit_code -eq 0 ]] && [[ ! $exception -eq 0 ]]; then    
-    exit_code=1
-fi
+npx coffee --ast "${tests_file}" &>  "${ast_file}"
+test_output=$(npx jasmine-node --color --junitreport --output ${output_dir} --coffee "${tests_file}" &> "${capture_file}")
+file=$(find ${output_dir} -type f -name "*.xml")
+node bin/results.js "${file}" "${output_dir}" "${capture_file}" "${ast_file}" ${tests_file}
 
 mv -f "${original_tests_file}" "${tests_file}"
-
-# Write the results.json file based on the exit code of the command that was 
-# just executed that tested the implementation file
-if [ $exit_code -eq 0 ]; then
-    jq -n '{version: 1, status: "pass"}' > ${results_file}
-else
-    jq -n --arg output "${test_output}" '{version: 1, status: "fail", message: $output}' > ${results_file}
-fi
-
-echo "${slug}: done"
