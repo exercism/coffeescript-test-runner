@@ -1,5 +1,6 @@
 { XMLParser } = require("fast-xml-parser");
 fs = require 'fs'
+he = require 'he'
 
 class TestRunner
   constructor: () ->
@@ -39,7 +40,8 @@ class TestRunner
       else
         file = data.split("\n")
         for test_case in matchingKeys
-          testInfo = @astData.find (element) => element.name is test_case['@_name']
+          name = he.decode(test_case['@_name']).replace(/'/g, "\\'");
+          testInfo = @astData.find (element) => he.decode(element.name) is name
           return @error_handeling() if testInfo is undefined
           testCode = file.slice(testInfo["loc"]["start"]["line"], testInfo["loc"]["end"]["line"])
           length = testCode[0].match(/^\s*/)[0].length
