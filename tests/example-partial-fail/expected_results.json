@@ -78,13 +78,13 @@
 			"name": "silence",
 			"test_code": "result = bob.hey ''\nexpect(result).toEqual 'Fine. Be that way!'",
 			"status": "fail",
-			"message": "Expected &apos;Okay. Be that way!&apos; to equal &apos;Fine. Be that way!&apos;."
+			"message": "Expected 'Okay. Be that way!' to equal 'Fine. Be that way!'."
 		},
 		{
 			"name": "prolonged silence",
 			"test_code": "result = bob.hey '   '\nexpect(result).toEqual 'Fine. Be that way!'",
 			"status": "fail",
-			"message": "Expected &apos;Okay. Be that way!&apos; to equal &apos;Fine. Be that way!&apos;."
+			"message": "Expected 'Okay. Be that way!' to equal 'Fine. Be that way!'."
 		}
 	]
 }

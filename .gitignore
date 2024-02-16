@@ -1,4 +1,7 @@
 tests/**/results.json
 tests/**/node_modules/
 tests/**/*.js
+tests/**/ast.json
+tests/**/capture
+tests/**/TEST*.xml
 
