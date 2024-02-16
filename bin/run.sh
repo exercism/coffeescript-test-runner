@@ -21,6 +21,15 @@ if [ -z "$1" ] || [ -z "$2" ] || [ -z "$3" ]; then
     exit 1
 fi
 
+sed_sub_in_place() {
+  s=${1}
+  s_w=${2//\//\\\/}
+  s_w=${s_w//\&/\\\&}
+  f="$3"
+  s_e="s/$s/$s_w/g"
+  sed --in-place "$s_e" "$f"  
+}
+
 slug="$1"
 input_dir="${2%/}"
 output_dir="${3%/}"
@@ -45,6 +54,9 @@ sed -i 's/xit/it/g' "${tests_file}"
 npx coffee --ast "${tests_file}" &>  "${ast_file}"
 test_output=$(npx jasmine-node --color --junitreport --output ${output_dir} --coffee "${tests_file}" &> "${capture_file}")
 file=$(find ${output_dir} -type f -name "*.xml")
+if test -f "$file"; then
+  sed_sub_in_place "&amp;apos;" "\\'" "${file}"
+fi
 node bin/results.js "${file}" "${output_dir}" "${capture_file}" "${ast_file}" ${tests_file}
 
 mv -f "${original_tests_file}" "${tests_file}"

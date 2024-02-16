@@ -1,7 +1,7 @@
 Bob = require './example-success'
 describe 'Bob', ->
   bob = new Bob()
-  it 'stating something', ->
+  it "stating 'something'", ->
     result = bob.hey 'Tom-ay-to, tom-aaaah-to.'
     expect(result).toEqual 'Whatever.'
 
@@ -9,7 +9,7 @@ describe 'Bob', ->
     result = bob.hey 'WATCH OUT!'
     expect(result).toEqual 'Whoa, chill out!'
 
-  xit 'asking a question', ->
+  xit "asking a question", ->
     result = bob.hey 'Does this cryogenic chamber make me look fat?'
     expect(result).toEqual 'Sure.'
 

@@ -40,7 +40,7 @@ class TestRunner
       else
         file = data.split("\n")
         for test_case in matchingKeys
-          name = he.decode(test_case['@_name']).replace(/'/g, "\\'");
+          name = he.decode(test_case['@_name'].replace(/'/g, "\'"));
           testInfo = @astData.find (element) => he.decode(element.name) is name
           return @error_handeling() if testInfo is undefined
           testCode = file.slice(testInfo["loc"]["start"]["line"], testInfo["loc"]["end"]["line"])

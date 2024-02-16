@@ -3,7 +3,7 @@
 	"status": "pass",
 	"tests": [
 		{
-			"name": "stating something",
+			"name": "stating 'something'",
 			"test_code": "result = bob.hey 'Tom-ay-to, tom-aaaah-to.'\nexpect(result).toEqual 'Whatever.'",
 			"status": "pass",
 			"message": null
