@@ -1,4 +1,4 @@
-FROM node:14-alpine
+FROM node:25.2.1-alpine3.23
 RUN apk add --no-cache jq coreutils bash
 
 ENV NO_UPDATE_NOTIFIER=true
