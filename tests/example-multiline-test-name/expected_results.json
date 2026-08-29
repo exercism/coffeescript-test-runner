@@ -1,0 +1,12 @@
+{
+	"version": 2,
+	"status": "pass",
+	"tests": [
+		{
+			"name": "supports test descriptions that are split across lines",
+			"test_code": "result = example.answer()\nexpect(result).toEqual 42",
+			"status": "pass",
+			"message": null
+		}
+	]
+}

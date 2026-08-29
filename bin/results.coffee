@@ -83,8 +83,9 @@ class TestRunner
         if typeof obj[key] is 'object' and obj[key] isnt null
           if obj[key]["type"]? and obj[key]["expression"]?["callee"]?["name"]?
             if obj[key]["type"] is "ExpressionStatement" and obj[key]["expression"]["callee"]["name"] is "it"
-              if obj[key]["expression"]?["arguments"]?[0]?["value"]? and obj[key]["expression"]?["arguments"]?[1]?["loc"]?
-                @astData.push({name: obj[key]["expression"]["arguments"][0]["value"], loc: obj[key]["expression"]["arguments"][1]["loc"]})
+              name = @read_test_name(obj[key]["expression"]?["arguments"]?[0])
+              if name? and obj[key]["expression"]?["arguments"]?[1]?["loc"]?
+                @astData.push({name: name, loc: obj[key]["expression"]["arguments"][1]["loc"]})
               else
                 console.log("incorrect")
             else
@@ -92,6 +93,17 @@ class TestRunner
           else
             search_keys(obj[key])
     search_keys(ast)
+
+  read_test_name: (node) =>
+    return unless node?
+    return node.value if typeof node.value is "string"
+    return unless node.type is "BinaryExpression" and node.operator is "+"
+
+    left = @read_test_name(node.left)
+    right = @read_test_name(node.right)
+    return unless left? and right?
+
+    left + right
 
   write_result: (status, test_cases = [], message = "") ->
     result = 
