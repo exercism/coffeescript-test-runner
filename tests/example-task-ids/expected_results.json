@@ -1,0 +1,27 @@
+{
+	"version": 3,
+	"status": "pass",
+	"tests": [
+		{
+			"name": "Should appear first",
+			"test_code": "expect(answer()).toEqual 42",
+			"task_id": 1,
+			"status": "pass",
+			"message": null
+		},
+		{
+			"name": "Should appear second",
+			"test_code": "expect(answer()).toEqual 42",
+			"task_id": 1,
+			"status": "pass",
+			"message": null
+		},
+		{
+			"name": "Should appear third",
+			"test_code": "expect(answer()).toEqual 42",
+			"task_id": 2,
+			"status": "pass",
+			"message": null
+		}
+	]
+}
