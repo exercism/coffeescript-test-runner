@@ -35,6 +35,7 @@ input_dir="${2%/}"
 output_dir="${3%/}"
 tests_file="${input_dir}/${slug}.spec.coffee"
 original_tests_file="${input_dir}/${slug}.spec.coffee.original"
+config_file="${input_dir}/.meta/config.json"
 capture_file="${output_dir}/capture"
 ast_file="${output_dir}/ast.json"
 results_file="${output_dir}/results.json"
@@ -57,6 +58,6 @@ file=$(find ${output_dir} -type f -name "*.xml")
 if test -f "$file"; then
   sed_sub_in_place "&amp;apos;" "\\'" "${file}"
 fi
-node bin/results.js "${file}" "${output_dir}" "${capture_file}" "${ast_file}" ${tests_file}
+node bin/results.js "${file}" "${output_dir}" "${capture_file}" "${ast_file}" "${tests_file}" "${config_file}"
 
 mv -f "${original_tests_file}" "${tests_file}"

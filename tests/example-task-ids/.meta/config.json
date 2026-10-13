@@ -1,0 +1,5 @@
+{
+  "custom": {
+    "flag.tests.task-per-describe": true
+  }
+}
