@@ -5,17 +5,21 @@ he = require 'he'
 class TestRunner
   constructor: () ->
     @astData = []
+    @taskIdsEnabled = false
+
+    configFile = process.argv[7]
+    if configFile? and fs.existsSync(configFile)
+      config = JSON.parse(fs.readFileSync(configFile, 'utf8'))
+      @taskIdsEnabled = config.custom?['flag.tests.task-per-describe'] is true
 
   read_test_cases: (results) =>
     fs.readFile process.argv[2], 'utf8', (err, data) =>
       if err
-        @error_handeling()
+        @error_handling()
       else
         @read_ast_tree()
           .then(() =>
-            options =
-              ignoreAttributes: false
-            parser = new XMLParser(options)
+            parser = new XMLParser(ignoreAttributes: false)
             @get_test_cases(parser.parse(data))
           )
           .catch((err) => console.log(err))
@@ -31,7 +35,7 @@ class TestRunner
         if typeof obj[key] is 'object'
           search_keys(obj[key])
     search_keys(result)
-    
+
     test_cases = []
 
     fs.readFile process.argv[6], 'utf8', (err, data) =>
@@ -42,13 +46,16 @@ class TestRunner
         for test_case in matchingKeys
           name = he.decode(test_case['@_name'].replace(/'/g, "\'"));
           testInfo = @astData.find (element) => he.decode(element.name) is name
-          return @error_handeling() if testInfo is undefined
+          return @error_handling() if testInfo is undefined
           testCode = file.slice(testInfo["loc"]["start"]["line"], testInfo["loc"]["end"]["line"])
           length = testCode[0].match(/^\s*/)[0].length
           testCode = (testCode.map (line) => (line.slice(length))).join("\n")
           data = 
             name: test_case['@_name']
             test_code: testCode
+
+          if @taskIdsEnabled and testInfo.task_id?
+            data['task_id'] = testInfo.task_id
           
           if test_case.hasOwnProperty('failure')
             data['status'] = 'fail'
@@ -59,7 +66,7 @@ class TestRunner
           test_cases.push(data)
         @write_result((if test_cases.some (item) -> item.status is "fail" then  "fail" else "pass"), test_cases)
 
-  error_handeling: () =>
+  error_handling: () =>
     fs.readFile process.argv[4], 'utf8', (err, data) =>
       if err
         console.log err
@@ -78,21 +85,27 @@ class TestRunner
     )
 
   get_ast_tree: (ast) =>
-    search_keys = (obj) =>
+    nextTaskId = 0
+    search_keys = (obj, taskId) =>
       for key in Object.keys(obj)
-        if typeof obj[key] is 'object' and obj[key] isnt null
-          if obj[key]["type"]? and obj[key]["expression"]?["callee"]?["name"]?
-            if obj[key]["type"] is "ExpressionStatement" and obj[key]["expression"]["callee"]["name"] is "it"
-              name = @read_test_name(obj[key]["expression"]?["arguments"]?[0])
-              if name? and obj[key]["expression"]?["arguments"]?[1]?["loc"]?
-                @astData.push({name: name, loc: obj[key]["expression"]["arguments"][1]["loc"]})
-              else
-                console.log("incorrect")
-            else
-              search_keys(obj[key])
+        child = obj[key]
+        continue unless typeof child is 'object' and child?
+
+        calleeName = child["expression"]?["callee"]?["name"]
+        if child["type"] is "ExpressionStatement" and calleeName is "it"
+          name = @read_test_name(child["expression"]?["arguments"]?[0])
+          if name? and child["expression"]?["arguments"]?[1]?["loc"]?
+            @astData.push({name: name, loc: child["expression"]["arguments"][1]["loc"], task_id: taskId})
           else
-            search_keys(obj[key])
-    search_keys(ast)
+            console.log("incorrect")
+        else if child["type"] is "ExpressionStatement" and calleeName is "describe"
+          nextTaskId += 1
+          search_keys(child, nextTaskId)
+        else
+          search_keys(child, taskId)
+
+    for statement in ast.program?.body ? []
+      search_keys(statement)
 
   read_test_name: (node) =>
     return unless node?
@@ -107,7 +120,7 @@ class TestRunner
 
   write_result: (status, test_cases = [], message = "") ->
     result = 
-      version: 2
+      version: 3
       status: status
       tests: test_cases
       message: message if message isnt ""
