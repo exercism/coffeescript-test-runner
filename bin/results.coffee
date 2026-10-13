@@ -127,7 +127,7 @@ class TestRunner
 
     
     
-    fs.writeFile "#{process.argv[3]}/results.json", JSON.stringify(result, null, "\t"), (err) ->
+    fs.writeFile "#{process.argv[3]}/results.json", "#{JSON.stringify(result, null, "\t")}\n", (err) ->
       if err
         console.log err
       else
