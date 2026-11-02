@@ -71,7 +71,10 @@ class TestRunner
       if err
         console.log err
       else
-        @write_result('error', [], data)
+        @write_result('error', [], @normalize_stack_trace(data))
+
+  normalize_stack_trace: (message) ->
+    message.replace /(node:internal\/[^:\n]+):\d+:\d+/g, '$1:<line>:<column>'
 
   read_ast_tree: () =>
     new Promise((resolve, reject) =>
